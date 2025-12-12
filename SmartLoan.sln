@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLoan.API", "SmartLoan.API\SmartLoan.API.csproj", "{54E46AF1-57C0-43A9-9E0F-FF61344923C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLoan.Data", "SmartLoan.Data\SmartLoan.Data.csproj", "{59557B8F-FD8C-4394-B9A0-365CA1B40814}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLoan.Services", "SmartLoan.Services\SmartLoan.Services.csproj", "{8F0D7DBF-6D2F-4D80-9BFF-131223890F4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54E46AF1-57C0-43A9-9E0F-FF61344923C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54E46AF1-57C0-43A9-9E0F-FF61344923C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54E46AF1-57C0-43A9-9E0F-FF61344923C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54E46AF1-57C0-43A9-9E0F-FF61344923C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59557B8F-FD8C-4394-B9A0-365CA1B40814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59557B8F-FD8C-4394-B9A0-365CA1B40814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59557B8F-FD8C-4394-B9A0-365CA1B40814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59557B8F-FD8C-4394-B9A0-365CA1B40814}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F0D7DBF-6D2F-4D80-9BFF-131223890F4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F0D7DBF-6D2F-4D80-9BFF-131223890F4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F0D7DBF-6D2F-4D80-9BFF-131223890F4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F0D7DBF-6D2F-4D80-9BFF-131223890F4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

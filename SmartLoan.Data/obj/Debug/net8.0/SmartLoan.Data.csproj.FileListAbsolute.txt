@@ -1,0 +1,14 @@
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\bin\Debug\net8.0\SmartLoan.Data.deps.json
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\bin\Debug\net8.0\SmartLoan.Data.runtimeconfig.json
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\bin\Debug\net8.0\SmartLoan.Data.dll
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\bin\Debug\net8.0\SmartLoan.Data.pdb
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\obj\Debug\net8.0\SmartLoan.Data.csproj.AssemblyReference.cache
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\obj\Debug\net8.0\SmartLoan.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\obj\Debug\net8.0\SmartLoan.Data.AssemblyInfoInputs.cache
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\obj\Debug\net8.0\SmartLoan.Data.AssemblyInfo.cs
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\obj\Debug\net8.0\SmartLoan.Data.csproj.CoreCompileInputs.cache
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\obj\Debug\net8.0\SmartLoan.Data.dll
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\obj\Debug\net8.0\refint\SmartLoan.Data.dll
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\obj\Debug\net8.0\SmartLoan.Data.pdb
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\obj\Debug\net8.0\SmartLoan.Data.genruntimeconfig.cache
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Data\obj\Debug\net8.0\ref\SmartLoan.Data.dll

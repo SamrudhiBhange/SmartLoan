@@ -1,0 +1,15 @@
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\bin\Debug\net8.0\SmartLoan.Services.deps.json
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\bin\Debug\net8.0\SmartLoan.Services.dll
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\bin\Debug\net8.0\SmartLoan.Services.pdb
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\bin\Debug\net8.0\SmartLoan.Data.dll
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\bin\Debug\net8.0\SmartLoan.Data.pdb
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\obj\Debug\net8.0\SmartLoan.Services.csproj.AssemblyReference.cache
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\obj\Debug\net8.0\SmartLoan.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\obj\Debug\net8.0\SmartLoan.Services.AssemblyInfoInputs.cache
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\obj\Debug\net8.0\SmartLoan.Services.AssemblyInfo.cs
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\obj\Debug\net8.0\SmartLoan.Services.csproj.CoreCompileInputs.cache
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\obj\Debug\net8.0\SmartLoa.CF0850A8.Up2Date
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\obj\Debug\net8.0\SmartLoan.Services.dll
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\obj\Debug\net8.0\refint\SmartLoan.Services.dll
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\obj\Debug\net8.0\SmartLoan.Services.pdb
+C:\Users\Samrudhi Bhange\OneDrive\Desktop\bhange\PROJECTS\SmartLoan\SmartLoan.Services\obj\Debug\net8.0\ref\SmartLoan.Services.dll
