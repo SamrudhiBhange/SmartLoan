@@ -1,0 +1,304 @@
+<div class="container-fluid px-3 px-md-4">
+  <!-- Header -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card shadow-sm border-0 bg-gradient bg-primary text-white">
+        <div class="card-body py-4">
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+              <h1 class="h2 mb-2">
+                <i class="fas fa-user-shield me-2"></i>Admin Dashboard
+              </h1>
+              <p class="mb-0 opacity-75">
+                <i class="fas fa-user me-1"></i> Welcome, {{authService.currentUserValue?.firstName}}
+                <span class="mx-2">•</span>
+                Manage loans, users, and system analytics
+              </p>
+            </div>
+            <div>
+              <button class="btn btn-light me-2" (click)="refreshDashboard()" [disabled]="isLoading">
+                <i class="fas fa-sync-alt" [class.fa-spin]="isLoading"></i>
+              </button>
+              <button class="btn btn-outline-light" (click)="goToUserDashboard()">
+                <i class="fas fa-exchange-alt me-1"></i> User View
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-3 text-muted">Loading dashboard data...</p>
+  </div>
+
+  <!-- Main Content -->
+  <div *ngIf="!isLoading">
+    <!-- Summary Stats -->
+    <div class="row g-3 mb-4">
+      <div class="col-xl-3 col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="text-muted mb-1">Total Loans</h6>
+                <h2 class="mb-0 text-primary">{{formatNumber(dashboardStats.totalLoans)}}</h2>
+                <small class="text-muted">{{formatCurrency(dashboardStats.totalLoanAmount)}} Total Amount</small>
+              </div>
+              <div class="bg-primary bg-opacity-10 p-3 rounded-circle">
+                <i class="fas fa-file-invoice-dollar fa-2x text-primary"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-xl-3 col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="text-muted mb-1">Pending Approval</h6>
+                <h2 class="mb-0 text-warning">{{formatNumber(dashboardStats.pendingLoans)}}</h2>
+                <small class="text-muted">Requires immediate attention</small>
+              </div>
+              <div class="bg-warning bg-opacity-10 p-3 rounded-circle">
+                <i class="fas fa-clock fa-2x text-warning"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-xl-3 col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="text-muted mb-1">Active Loans</h6>
+                <h2 class="mb-0 text-success">{{formatNumber(dashboardStats.activeLoans)}}</h2>
+                <small class="text-muted">{{formatCurrency(dashboardStats.totalPendingAmount)}} Outstanding</small>
+              </div>
+              <div class="bg-success bg-opacity-10 p-3 rounded-circle">
+                <i class="fas fa-chart-line fa-2x text-success"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-xl-3 col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="text-muted mb-1">Revenue Generated</h6>
+                <h3 class="mb-0 text-info">{{formatCurrency(summary.totalRevenue)}}</h3>
+                <small class="text-muted">From {{summary.totalCustomers}} customers</small>
+              </div>
+              <div class="bg-info bg-opacity-10 p-3 rounded-circle">
+                <i class="fas fa-money-bill-wave fa-2x text-info"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="row g-4 mb-4">
+      <!-- Loan Status Chart -->
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header bg-white border-0 py-3">
+            <h5 class="mb-0">
+              <i class="fas fa-chart-pie me-2 text-primary"></i>Loan Status Overview
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="chart-container" style="position: relative; height: 300px;">
+              <canvas #statsChart></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Monthly Performance Chart -->
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header bg-white border-0 py-3">
+            <h5 class="mb-0">
+              <i class="fas fa-chart-bar me-2 text-success"></i>Monthly Performance
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="chart-container" style="position: relative; height: 300px;">
+              <canvas #monthlyChart></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pending Loans & Recent Activity -->
+    <div class="row g-4">
+      <!-- Pending Loans -->
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header bg-white border-0 py-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">
+                <i class="fas fa-clock me-2 text-warning"></i>Pending Approvals
+                <span class="badge bg-warning ms-2">{{pendingLoans.length}}</span>
+              </h5>
+              <button class="btn btn-sm btn-outline-primary" (click)="viewPendingLoans()">
+                View All
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Empty State -->
+            <div *ngIf="pendingLoans.length === 0" class="text-center py-4">
+              <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+              <h6>No pending loans</h6>
+              <p class="text-muted">All loans have been processed.</p>
+            </div>
+
+            <!-- Pending Loans List -->
+            <div *ngIf="pendingLoans.length > 0" class="list-group list-group-flush">
+              <div *ngFor="let loan of pendingLoans" class="list-group-item border-0 px-0 py-3">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="d-flex align-items-center mb-1">
+                      <h6 class="mb-0 me-2">#{{loan.id}} - {{formatCurrency(loan.principalAmount)}}</h6>
+                      <span class="badge bg-warning">Pending</span>
+                    </div>
+                    <p class="text-muted small mb-1">
+                      <i class="fas fa-user me-1"></i>
+                      {{loan.user?.firstName}} {{loan.user?.lastName}}
+                      <span class="mx-1">•</span>
+                      {{loan.loanTermMonths}} months @ {{loan.interestRate}}%
+                    </p>
+                    <small class="text-muted">
+                      Applied: {{loan.createdAt | date:'mediumDate'}}
+                    </small>
+                  </div>
+                  <div class="btn-group btn-group-sm">
+                    <button class="btn btn-success" (click)="approveLoan(loan.id)" title="Approve">
+                      <i class="fas fa-check"></i>
+                    </button>
+                    <button class="btn btn-danger" (click)="rejectLoan(loan.id)" title="Reject">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Loan Activity -->
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header bg-white border-0 py-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">
+                <i class="fas fa-history me-2 text-info"></i>Recent Loan Activity
+              </h5>
+              <button class="btn btn-sm btn-outline-primary" (click)="viewAllLoans()">
+                View All
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Empty State -->
+            <div *ngIf="recentLoans.length === 0" class="text-center py-4">
+              <i class="fas fa-file-invoice-dollar fa-3x text-muted mb-3"></i>
+              <h6>No recent loans</h6>
+              <p class="text-muted">No loan activity recorded.</p>
+            </div>
+
+            <!-- Recent Loans Table -->
+            <div *ngIf="recentLoans.length > 0" class="table-responsive">
+              <table class="table table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let loan of recentLoans">
+                    <td>#{{loan.id}}</td>
+                    <td>
+                      <small>{{loan.user?.firstName}} {{loan.user?.lastName?.charAt(0)}}.</small>
+                    </td>
+                    <td>{{formatCurrency(loan.principalAmount)}}</td>
+                    <td>
+                      <span [class]="getStatusBadgeClass(loan.status)" class="badge-sm">
+                        {{loan.status}}
+                      </span>
+                    </td>
+                    <td>
+                      <small>{{loan.createdAt | date:'shortDate'}}</small>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Actions -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-white border-0 py-3">
+            <h5 class="mb-0">
+              <i class="fas fa-cogs me-2 text-secondary"></i>Admin Actions
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-3 col-6">
+                <button class="btn btn-outline-primary w-100 py-3">
+                  <i class="fas fa-users fa-2x mb-2"></i>
+                  <div>Manage Users</div>
+                </button>
+              </div>
+              <div class="col-md-3 col-6">
+                <button class="btn btn-outline-success w-100 py-3">
+                  <i class="fas fa-file-invoice-dollar fa-2x mb-2"></i>
+                  <div>All Loans</div>
+                </button>
+              </div>
+              <div class="col-md-3 col-6">
+                <button class="btn btn-outline-warning w-100 py-3">
+                  <i class="fas fa-chart-bar fa-2x mb-2"></i>
+                  <div>Reports</div>
+                </button>
+              </div>
+              <div class="col-md-3 col-6">
+                <button class="btn btn-outline-info w-100 py-3">
+                  <i class="fas fa-cog fa-2x mb-2"></i>
+                  <div>Settings</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

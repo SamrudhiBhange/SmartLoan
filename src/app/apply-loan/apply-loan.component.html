@@ -1,0 +1,215 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <!-- Header -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h1 class="h3 mb-1">
+            <i class="fas fa-file-contract text-primary me-2"></i>Apply for Loan
+          </h1>
+          <p class="text-muted mb-0">Fill in the details below to apply for a new loan</p>
+        </div>
+        <button class="btn btn-outline-secondary" (click)="goBack()">
+          <i class="fas fa-arrow-left me-1"></i> Back to Dashboard
+        </button>
+      </div>
+
+      <!-- Messages -->
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show mb-4">
+        <i class="fas fa-exclamation-circle me-2"></i>{{ errorMessage }}
+        <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+      </div>
+      
+      <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show mb-4">
+        <i class="fas fa-check-circle me-2"></i>{{ successMessage }}
+        <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+      </div>
+
+      <div class="row g-4">
+        <!-- Loan Application Form -->
+        <div class="col-lg-7">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 py-3">
+              <h5 class="mb-0">
+                <i class="fas fa-edit me-2 text-primary"></i>Loan Details
+              </h5>
+            </div>
+            <div class="card-body p-4">
+              <!-- Loan Amount -->
+              <div class="mb-4">
+                <label class="form-label fw-semibold">Loan Amount</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light">
+                    <i class="fas fa-dollar-sign text-primary"></i>
+                  </span>
+                  <input type="number" class="form-control form-control-lg" 
+                         [(ngModel)]="principalAmount" 
+                         min="1000" max="1000000" step="1000"
+                         placeholder="Enter loan amount">
+                  <span class="input-group-text bg-light">$</span>
+                </div>
+                <div class="form-text">
+                  Minimum: $1,000 | Maximum: $1,000,000
+                </div>
+                <div class="mt-2">
+                  <input type="range" class="form-range" min="1000" max="100000" step="1000"
+                         [(ngModel)]="principalAmount">
+                </div>
+              </div>
+
+              <!-- Loan Term -->
+              <div class="mb-4">
+                <label class="form-label fw-semibold">Loan Term (Months)</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light">
+                    <i class="fas fa-calendar-alt text-primary"></i>
+                  </span>
+                  <input type="number" class="form-control form-control-lg"
+                         [(ngModel)]="loanTermMonths"
+                         min="6" max="360" step="1"
+                         placeholder="Enter loan term in months">
+                  <span class="input-group-text bg-light">months</span>
+                </div>
+                <div class="form-text">
+                  Minimum: 6 months (0.5 years) | Maximum: 360 months (30 years)
+                </div>
+                <div class="mt-2">
+                  <input type="range" class="form-range" min="6" max="120" step="6"
+                         [(ngModel)]="loanTermMonths">
+                </div>
+              </div>
+
+              <!-- Interest Rate -->
+              <div class="mb-4">
+                <label class="form-label fw-semibold">Annual Interest Rate</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light">
+                    <i class="fas fa-percent text-primary"></i>
+                  </span>
+                  <input type="number" class="form-control form-control-lg"
+                         [(ngModel)]="interestRate"
+                         min="1" max="30" step="0.1"
+                         placeholder="Enter annual interest rate">
+                  <span class="input-group-text bg-light">% per year</span>
+                </div>
+                <div class="form-text">
+                  Minimum: 1% | Maximum: 30%
+                </div>
+                <div class="mt-2">
+                  <input type="range" class="form-range" min="1" max="20" step="0.5"
+                         [(ngModel)]="interestRate">
+                </div>
+              </div>
+
+              <!-- EMI Calculator -->
+              <div class="mb-4">
+                <button class="btn btn-primary w-100 py-3" (click)="calculateEMI()" [disabled]="calculatingEMI">
+                  <span *ngIf="!calculatingEMI">
+                    <i class="fas fa-calculator me-2"></i>Calculate EMI
+                  </span>
+                  <span *ngIf="calculatingEMI">
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+                    Calculating...
+                  </span>
+                </button>
+              </div>
+
+              <!-- Submit Button -->
+              <button class="btn btn-success btn-lg w-100 py-3" (click)="applyForLoan()" [disabled]="isLoading">
+                <span *ngIf="!isLoading">
+                  <i class="fas fa-paper-plane me-2"></i>Submit Loan Application
+                </span>
+                <span *ngIf="isLoading">
+                  <span class="spinner-border spinner-border-sm me-2"></span>
+                  Submitting Application...
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- EMI Calculator Results & Preview -->
+        <div class="col-lg-5">
+          <!-- EMI Results -->
+          <div *ngIf="emiResult" class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white border-0 py-3">
+              <h5 class="mb-0">
+                <i class="fas fa-calculator me-2 text-success"></i>EMI Calculation
+              </h5>
+            </div>
+            <div class="card-body p-4">
+              <div class="text-center mb-4">
+                <div class="display-6 text-success fw-bold">{{formatCurrency(emiResult.emi)}}</div>
+                <p class="text-muted mb-0">Monthly Payment (EMI)</p>
+              </div>
+              
+              <div class="row g-3">
+                <div class="col-6">
+                  <div class="border rounded p-3 text-center">
+                    <div class="text-muted small">Loan Amount</div>
+                    <div class="fw-bold">{{formatCurrency(principalAmount)}}</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="border rounded p-3 text-center">
+                    <div class="text-muted small">Total Interest</div>
+                    <div class="fw-bold text-warning">{{formatCurrency(emiResult.interest)}}</div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="border rounded p-3 text-center">
+                    <div class="text-muted small">Total Repayment</div>
+                    <div class="fw-bold text-primary">{{formatCurrency(emiResult.total)}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loan Summary -->
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 py-3">
+              <h5 class="mb-0">
+                <i class="fas fa-clipboard-list me-2 text-info"></i>Loan Summary
+              </h5>
+            </div>
+            <div class="card-body p-4">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2">
+                  <span>Loan Amount</span>
+                  <span class="fw-bold">{{formatCurrency(principalAmount)}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2">
+                  <span>Loan Term</span>
+                  <span class="fw-bold">{{loanTermMonths}} months</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2">
+                  <span>Interest Rate</span>
+                  <span class="fw-bold">{{interestRate}}% per annum</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2">
+                  <span>Processing Fee</span>
+                  <span class="fw-bold">$0</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2">
+                  <span>Insurance</span>
+                  <span class="fw-bold">Included</span>
+                </li>
+              </ul>
+              
+              <hr>
+              
+              <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>
+                <small>
+                  Your loan application will be reviewed within 24-48 hours.
+                  You'll be notified via email once a decision is made.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
