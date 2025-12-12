@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "MCK0YIU5ida9bW7GEu1HMatdPOc6MezRFh13UpPO+Sk=",
+  "Source": "SmartLoan.API",
+  "BasePath": "_content/SmartLoan.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
